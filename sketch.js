@@ -1,50 +1,54 @@
-let snake;
-let resolution = 20;
+let posX = 0;
+let posY = 0;
+
+let speedX = 1;
+let speedY = 1;
+
+let dirX = 1;
+let dirY = 1;
+
 
 function setup() {
-    createCanvas(400, 400);
-    snake = new Snake();
+  createCanvas(400, 400);
+  frameRate(1);
 }
 
 function draw() {
-    frameRate(5);
-    scale(resolution);
-    background(120);
-    snake.update();
-    snake.show();
+  scale(10);
+  background(120);
+  noStroke();
+  rect(posX, posY, 1, 1);
+  posX = posX + (speedX * dirX);
+  posY = posY + (speedY * dirY);
+  console.log("dirX= " + dirX);
+  console.log("dirY= " + dirY);
+}
+
+function setDir(x, y) {
+  speedX = speedX * x;
+  speedY = speedY * y;
 }
 
 function keyPressed() {
-
-    // if (keyCode === UP_ARROW) {
-    //     snake.setDir(0,-1);
-    // }
-    // else if(keyCode === DOWN_ARROW) {
-    //     snake.setDir(0,1);
-    // }
-    // else if(keyCode === LEFT_ARROW) {
-    //     snake.setDir(-1,0);
-    // }
-    // else if(keyCode === RIGHT_ARROW) {
-    //     snake.setDir(1,0);
-    // }
-
-    switch (keyCode) {
-        case UP_ARROW:
-            snake.setDir(0, -1);
-            break;
-        case DOWN_ARROW:
-            snake.setDir(0, 1);
-            break;
-        case LEFT_ARROW:
-            snake.setDir(-1, 0);
-            break;
-        case RIGHT_ARROW:
-            snake.setDir(1, 0);
-            break;
-
-        default:
-            break;
-    }
+  switch (keyCode) {
+    case UP_ARROW:
+      dirX = 0;
+      dirY = -1;
+      break;
+    case DOWN_ARROW:
+      dirX = 0;
+      dirY = 1;
+      break;
+    case LEFT_ARROW:
+      dirX = -1;
+      dirY = 0;
+      break;
+    case RIGHT_ARROW:
+      dirX = 1;
+      dirY = 0;
+      break;
+    default:
+      break;
+  }
 
 }
