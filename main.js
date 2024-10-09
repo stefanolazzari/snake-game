@@ -1,17 +1,39 @@
 let snake;
 let resolution = 20;
+let scalatura = 2;
+let mela;
+let larghezza;
+let altezza;
 
 function setup() {
     createCanvas(400, 400);
-    snake = new Snake();
+    frameRate(5);
+    larghezza = floor(width / resolution);
+    altezza = floor(height / resolution);
+    snake = new Snake(larghezza,altezza);
+    posizioneMela();
+}
+
+function posizioneMela() {
+    let x = floor(random(larghezza));
+    let y = floor(random(altezza));
+    mela = createVector(x, y);
 }
 
 function draw() {
-    frameRate(5);
     scale(resolution);
     background(120);
+
+    if(snake.mangia(mela)){
+        posizioneMela();
+    };
+
     snake.update();
     snake.show();
+
+    noStroke();
+    fill(180,0,0);
+    rect(mela.x,mela.y,1,1);
 }
 
 function keyPressed() {
