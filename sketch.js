@@ -1,54 +1,91 @@
-let posX = 0;
-let posY = 0;
+let posSerpenteX = 0;
+let posSerpenteY = 0;
 
-let speedX = 1;
-let speedY = 1;
+let velocitaSerpenteX = 1;
+let velocitaSerpenteY = 1;
 
-let dirX = 1;
-let dirY = 1;
+let direzioneSerpenteX = 1;
+let direzioneSerpenteY = 1;
+
+let posMelaX;
+let posMelaY;
+
+let riscalatura = 10;
 
 
 function setup() {
   createCanvas(400, 400);
-  frameRate(1);
+  frameRate(5);
+  posMelaX = floor(random(0, width/riscalatura));
+  posMelaY = floor(random(0, height/riscalatura));
+  
 }
 
 function draw() {
-  scale(10);
+  scale(riscalatura);
   background(120);
-  noStroke();
-  rect(posX, posY, 1, 1);
-  posX = posX + (speedX * dirX);
-  posY = posY + (speedY * dirY);
-  console.log("dirX= " + dirX);
-  console.log("dirY= " + dirY);
+  impostaSerpente();
+  muoviSerpente();
+  creaMela();
+
+  if (posMelaX == posSerpenteX && posMelaY == posSerpenteY) {
+    mangiaMela();
+  }
 }
 
-function setDir(x, y) {
-  speedX = speedX * x;
-  speedY = speedY * y;
+function impostaDirezione(x, y) {
+  velocitaSerpenteX = velocitaSerpenteX * x;
+  velocitaSerpenteY = velocitaSerpenteY * y;
 }
 
 function keyPressed() {
   switch (keyCode) {
     case UP_ARROW:
-      dirX = 0;
-      dirY = -1;
+      direzioneSerpenteX = 0;
+      direzioneSerpenteY = -1;
       break;
     case DOWN_ARROW:
-      dirX = 0;
-      dirY = 1;
+      direzioneSerpenteX = 0;
+      direzioneSerpenteY = 1;
       break;
     case LEFT_ARROW:
-      dirX = -1;
-      dirY = 0;
+      direzioneSerpenteX = -1;
+      direzioneSerpenteY = 0;
       break;
     case RIGHT_ARROW:
-      dirX = 1;
-      dirY = 0;
+      direzioneSerpenteX = 1;
+      direzioneSerpenteY = 0;
       break;
     default:
       break;
   }
 
+}
+
+
+function impostaSerpente() {
+  noStroke();
+  fill(0);
+  rect(posSerpenteX, posSerpenteY, 1, 1)
+}
+
+
+function muoviSerpente() {
+  posSerpenteX = posSerpenteX + velocitaSerpenteX * direzioneSerpenteX;
+  posSerpenteY = posSerpenteY + velocitaSerpenteY * direzioneSerpenteY;
+  console.log(posSerpenteX,posSerpenteY);
+}
+
+function mangiaMela(){
+  posMelaX = floor(random(0, width/riscalatura));
+  posMelaY = floor(random(0, height/riscalatura));
+
+}
+
+
+function creaMela(){
+  noStroke();
+  fill(255,0,0);
+  rect(posMelaX, posMelaY, 1, 1)
+  console.log(posMelaX, posMelaY);
 }
