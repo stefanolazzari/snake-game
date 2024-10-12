@@ -1,5 +1,5 @@
-let snake;
-let resolution = 20;
+let serpente;
+let risoluzione = 20;
 let scalatura = 2;
 let mela;
 let larghezza;
@@ -7,10 +7,10 @@ let altezza;
 
 function setup() {
     createCanvas(400, 400);
-    frameRate(5);
-    larghezza = floor(width / resolution);
-    altezza = floor(height / resolution);
-    snake = new Snake(larghezza,altezza);
+    frameRate(10);
+    larghezza = floor(width / risoluzione);
+    altezza = floor(height / risoluzione);
+    serpente = new Serpente(larghezza,altezza);
     posizioneMela();
 }
 
@@ -21,48 +21,35 @@ function posizioneMela() {
 }
 
 function draw() {
-    scale(resolution);
+    scale(risoluzione);
     background(120);
 
-    if(snake.mangia(mela)){
+    if(serpente.mangia(mela)){
         posizioneMela();
     };
 
-    snake.update();
-    snake.show();
+    serpente.aggiorna();
+    serpente.mostra();
 
     noStroke();
     fill(180,0,0);
-    rect(mela.x,mela.y,1,1);
+    square(mela.x,mela.y,1);
 }
 
 function keyPressed() {
 
-    // if (keyCode === UP_ARROW) {
-    //     snake.setDir(0,-1);
-    // }
-    // else if(keyCode === DOWN_ARROW) {
-    //     snake.setDir(0,1);
-    // }
-    // else if(keyCode === LEFT_ARROW) {
-    //     snake.setDir(-1,0);
-    // }
-    // else if(keyCode === RIGHT_ARROW) {
-    //     snake.setDir(1,0);
-    // }
-
     switch (keyCode) {
         case UP_ARROW:
-            snake.setDir(0, -1);
+            serpente.impostaDirezione(0, -1);
             break;
         case DOWN_ARROW:
-            snake.setDir(0, 1);
+            serpente.impostaDirezione(0, 1);
             break;
         case LEFT_ARROW:
-            snake.setDir(-1, 0);
+            serpente.impostaDirezione(-1, 0);
             break;
         case RIGHT_ARROW:
-            snake.setDir(1, 0);
+            serpente.impostaDirezione(1, 0);
             break;
 
         default:
