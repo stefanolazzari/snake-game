@@ -7,7 +7,7 @@ let altezza;
 
 function setup() {
     createCanvas(400, 400);
-    frameRate(10);
+    frameRate(2);
     larghezza = floor(width / risoluzione);
     altezza = floor(height / risoluzione);
     serpente = new Serpente(larghezza,altezza);
@@ -29,7 +29,6 @@ function draw() {
     };
 
     serpente.aggiorna();
-    serpente.mostra();
 
     noStroke();
     fill(180,0,0);
