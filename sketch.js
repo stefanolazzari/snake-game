@@ -16,22 +16,22 @@ let riscalatura = 10;
 function setup() {
   createCanvas(400, 400);
   frameRate(5);
-  posMelaX = floor(random(0, width/riscalatura));
-  posMelaY = floor(random(0, height/riscalatura));
-  
-}
-
-function draw() {
+  posMelaX = floor(random(0, width / riscalatura));
+  posMelaY = floor(random(0, height / riscalatura));
   scale(riscalatura);
-  background(120);
-  impostaSerpente();
-  muoviSerpente();
-  creaMela();
-
-  if (posMelaX == posSerpenteX && posMelaY == posSerpenteY) {
-    mangiaMela();
-  }
 }
+
+// function draw() {
+//   scale(riscalatura);
+//   background(120);
+//   impostaSerpente();
+//   muoviSerpente();
+//   creaMela();
+
+//   if (posMelaX == posSerpenteX && posMelaY == posSerpenteY) {
+//     mangiaMela();
+//   }
+// }
 
 function impostaDirezione(x, y) {
   velocitaSerpenteX = velocitaSerpenteX * x;
@@ -43,18 +43,22 @@ function keyPressed() {
     case UP_ARROW:
       direzioneSerpenteX = 0;
       direzioneSerpenteY = -1;
+      aggiorna();
       break;
     case DOWN_ARROW:
       direzioneSerpenteX = 0;
       direzioneSerpenteY = 1;
+      aggiorna();
       break;
     case LEFT_ARROW:
       direzioneSerpenteX = -1;
       direzioneSerpenteY = 0;
+      aggiorna();
       break;
     case RIGHT_ARROW:
       direzioneSerpenteX = 1;
       direzioneSerpenteY = 0;
+      aggiorna();
       break;
     default:
       break;
@@ -73,19 +77,42 @@ function impostaSerpente() {
 function muoviSerpente() {
   posSerpenteX = posSerpenteX + velocitaSerpenteX * direzioneSerpenteX;
   posSerpenteY = posSerpenteY + velocitaSerpenteY * direzioneSerpenteY;
-  console.log(posSerpenteX,posSerpenteY);
+  //console.log(posSerpenteX,posSerpenteY);
 }
 
-function mangiaMela(){
-  posMelaX = floor(random(0, width/riscalatura));
-  posMelaY = floor(random(0, height/riscalatura));
+function mangiaMela() {
+  posMelaX = floor(random(0, width / riscalatura));
+  posMelaY = floor(random(0, height / riscalatura));
 
 }
 
 
-function creaMela(){
+function creaMela() {
   noStroke();
-  fill(255,0,0);
+  fill(255, 0, 0);
   rect(posMelaX, posMelaY, 1, 1)
-  console.log(posMelaX, posMelaY);
+  //console.log(posMelaX, posMelaY);
+}
+
+function mousePressed() {
+  console.log(" mouse pressed");
+
+
+}
+
+
+function aggiorna(){
+
+  background(120);
+  muoviSerpente();
+  impostaSerpente();
+
+  creaMela();
+
+  if (posMelaX == posSerpenteX && posMelaY == posSerpenteY) {
+    mangiaMela();
+
+
+  }
+
 }
